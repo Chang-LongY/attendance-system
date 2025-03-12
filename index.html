@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>線上點名系統</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        .container {
+            margin: 20px auto;
+            width: 80%;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            max-width: 400px;
+            margin: auto;
+        }
+        .student {
+            padding: 15px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .student.present {
+            background-color: #ccc;
+            color: #666;
+        }
+        .reset {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>線上點名系統</h1>
+    <div class="container">
+        <div class="grid" id="attendanceGrid"></div>
+        <button class="reset" id="resetButton">重置點名</button>
+    </div>
+
+    <script>
+        const grid = document.getElementById("attendanceGrid");
+        const resetButton = document.getElementById("resetButton");
+
+        // 產生 1-35 的按鈕
+        for (let i = 1; i <= 35; i++) {
+            const button = document.createElement("button");
+            button.textContent = i;
+            button.classList.add("student");
+            button.addEventListener("click", () => {
+                button.classList.toggle("present");
+            });
+            grid.appendChild(button);
+        }
+
+        // 重置點名
+        resetButton.addEventListener("click", () => {
+            document.querySelectorAll(".student").forEach(button => {
+                button.classList.remove("present");
+            });
+        });
+    </script>
+</body>
+</html>
